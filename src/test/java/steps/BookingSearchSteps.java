@@ -9,10 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BookingMainPage;
 import pages.BookingSearchPage;
-
 import java.util.List;
-
-import static com.sun.jmx.snmp.ThreadContext.contains;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsIterableContaining.hasItem;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class BookingSearchSteps {
 
@@ -21,38 +21,37 @@ public class BookingSearchSteps {
     private WebDriver driver;
     private SearchItem searchItem;
     private BookingMainPage bookingMainPage;
-    String searchString;
+    private int hotelIndex;
     
     @Given("I want to search for {string}")
     public void iWantToSearchFor(String hotelName) {
-        searchString = hotelName;
-        driver = new ChromeDriver();
-        bookingMainPage = new BookingMainPage(driver);
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
+        searchItem = new SearchItem(hotelName);
     }
 
     @When("I do search")
     public void iDoSearch() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get(BOOKING_URL);
-        bookingMainPage.searchByKeyword("Europe Minsk");
+        bookingMainPage = new BookingMainPage(driver);
+        bookingMainPage.searchByKeyword(searchItem.getSearchString());
+        searchPage = new BookingSearchPage(driver);
     }
 
     @Then("Results page should contain {string}")
     public void resultsPageShouldContain(String arg0) {
         BookingSearchPage resultPage = new BookingSearchPage(driver);
-        resultPage.isPageOpened();
-        List<String> hotels = resultPage.getResults();
-        assertThat(horels, contains(arg0));
-    }
-
-    @And("rating should be {string}")
-    public void ratingShouldBe(String arg0) {
-
-        BookingResultsPage page = new BookingResultsPage(driver);
-        String rating = page.getRatingFor(hotelName);
-        assertEquals(rating, arg0);
+        List<String> hotels = resultPage.getResultLinks();
+        hotelIndex = hotels.indexOf(arg0);
+        assertThat(hotels, hasItem(arg0));
     }
 
     @And("Rate is {string}")
     public void rateIs(String arg0) {
+        BookingSearchPage page = new BookingSearchPage(driver);
+        List<String> rate = page.getHotelsRate();
+        assertEquals(rate.get(hotelIndex), arg0);
+        driver.quit();
     }
 }
