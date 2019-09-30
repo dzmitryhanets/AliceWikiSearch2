@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BookingMainPage;
 import pages.BookingSearchPage;
+import utils.CapabilitiesGenerator;
+
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -31,7 +33,7 @@ public class BookingSearchSteps {
 
     @When("I do search")
     public void iDoSearch() {
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.get(BOOKING_URL);
         bookingMainPage = new BookingMainPage(driver);

@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import pages.WikiMainPage;
 import pages.WikiSearchPage;
+import utils.CapabilitiesGenerator;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class SearchSteps{
 
     @cucumber.api.java.en.When("User does search")
     public void search() {
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.get(WIKI_URL);
         wikiMainPage = new WikiMainPage(driver);
         wikiMainPage.searchByKeyword(searchItem.getSearchString());
