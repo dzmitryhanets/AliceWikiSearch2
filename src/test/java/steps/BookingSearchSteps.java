@@ -44,21 +44,21 @@ public class BookingSearchSteps {
         searchPage = new BookingSearchPage(driver);
     }
 
-    @Step("Checking if hotel name is correct")
+    @Step("Checking if hotel name is correct (Europe)")
     @Then("Results page should contain {string}")
-    public void resultsPageShouldContain(String arg0) {
+    public void resultsPageShouldContain(String hotelName) {
         BookingSearchPage resultPage = new BookingSearchPage(driver);
         List<String> hotels = resultPage.getResultLinks();
-        hotelIndex = hotels.indexOf(arg0);
-        assertThat(hotels, hasItem(arg0));
+        hotelIndex = hotels.indexOf(hotelName);
+        assertThat(hotels, hasItem(hotelName));
     }
 
-    @Step("Checking if hotel has correct rate")
+    @Step("Checking if hotel has correct rate (9.0)")
     @And("Rate is {string}")
-    public void rateIs(String arg0) {
+    public void rateIs(String rateValue) {
         BookingSearchPage page = new BookingSearchPage(driver);
         List<String> rate = page.getHotelsRate();
-        assertEquals(rate.get(hotelIndex), arg0);
+        assertEquals(rate.get(hotelIndex), rateValue);
         driver.quit();
     }
 }
