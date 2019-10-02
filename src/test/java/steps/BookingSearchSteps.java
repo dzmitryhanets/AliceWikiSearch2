@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import model.SearchItem;
 import org.openqa.selenium.WebDriver;
@@ -56,7 +55,6 @@ public class BookingSearchSteps {
     }
 
     @Step("Checking if hotel has correct rate (9.0)")
-    @Attachment(value = "screenshot for step 4", type = "image/png")
     @And("Rate is {string}")
     public void rateIs(String rateValue) {
         BookingSearchPage page = new BookingSearchPage(driver);
