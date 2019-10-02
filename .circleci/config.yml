@@ -46,10 +46,10 @@ workflows:
   periodical:
     triggers:
       - schedule:
-          cron: "0 8 * * *"
+          cron: "* * * * *"
           filters:
             branches:
               only:
-                - master
+                - master1
     jobs:
       - ui-tests
