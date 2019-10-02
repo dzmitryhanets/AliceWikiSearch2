@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import model.SearchItem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,13 +25,15 @@ public class BookingSearchSteps {
     private SearchItem searchItem;
     private BookingMainPage bookingMainPage;
     private int hotelIndex;
-    
+
+    @Step("User wants to find hotel")
     @Given("I want to search for {string}")
     public void iWantToSearchFor(String hotelName) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
         searchItem = new SearchItem(hotelName);
     }
 
+    @Step("User performs search")
     @When("I do search")
     public void iDoSearch() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
@@ -41,6 +44,7 @@ public class BookingSearchSteps {
         searchPage = new BookingSearchPage(driver);
     }
 
+    @Step("Checking if hotel name is correct")
     @Then("Results page should contain {string}")
     public void resultsPageShouldContain(String arg0) {
         BookingSearchPage resultPage = new BookingSearchPage(driver);
@@ -49,6 +53,7 @@ public class BookingSearchSteps {
         assertThat(hotels, hasItem(arg0));
     }
 
+    @Step("Checking if hotel has correct rate")
     @And("Rate is {string}")
     public void rateIs(String arg0) {
         BookingSearchPage page = new BookingSearchPage(driver);
