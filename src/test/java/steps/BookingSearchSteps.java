@@ -29,16 +29,13 @@ public class BookingSearchSteps {
     private int hotelIndex;
 
     @Step("User wants to find hotel")
-    @Attachment(value = "screenshot for step 1", type = "image/png")
     @Given("I want to search for {string}")
     public void iWantToSearchFor(String hotelName) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
         searchItem = new SearchItem(hotelName);
-        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("User performs search")
-    @Attachment(value = "screenshot for step 2", type = "image/png")
     @When("I do search")
     public void iDoSearch() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
@@ -47,18 +44,15 @@ public class BookingSearchSteps {
         bookingMainPage = new BookingMainPage(driver);
         bookingMainPage.searchByKeyword(searchItem.getSearchString());
         searchPage = new BookingSearchPage(driver);
-        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("Checking if hotel name is correct (Europe)")
-    @Attachment(value = "screenshot for step 3", type = "image/png")
     @Then("Results page should contain {string}")
     public void resultsPageShouldContain(String hotelName) {
         BookingSearchPage resultPage = new BookingSearchPage(driver);
         List<String> hotels = resultPage.getResultLinks();
         hotelIndex = hotels.indexOf(hotelName);
         assertThat(hotels, hasItem(hotelName));
-        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("Checking if hotel has correct rate (9.0)")
@@ -68,7 +62,7 @@ public class BookingSearchSteps {
         BookingSearchPage page = new BookingSearchPage(driver);
         List<String> rate = page.getHotelsRate();
         assertEquals(rate.get(hotelIndex), rateValue);
-        driver.quit();
         AllureUtils.takeScreenshot(driver);
+        driver.quit();
     }
 }
