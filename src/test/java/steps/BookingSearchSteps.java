@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import model.SearchItem;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,7 @@ public class BookingSearchSteps {
     private int hotelIndex;
 
     @Step("User wants to find hotel")
+    @Attachment(value = "screenshot", type = "image/png")
     @Given("I want to search for {string}")
     public void iWantToSearchFor(String hotelName) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
@@ -34,6 +36,7 @@ public class BookingSearchSteps {
     }
 
     @Step("User performs search")
+    @Attachment(value = "screenshot", type = "image/png")
     @When("I do search")
     public void iDoSearch() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
@@ -45,6 +48,7 @@ public class BookingSearchSteps {
     }
 
     @Step("Checking if hotel name is correct (Europe)")
+    @Attachment(value = "screenshot", type = "image/png")
     @Then("Results page should contain {string}")
     public void resultsPageShouldContain(String hotelName) {
         BookingSearchPage resultPage = new BookingSearchPage(driver);
@@ -54,6 +58,7 @@ public class BookingSearchSteps {
     }
 
     @Step("Checking if hotel has correct rate (9.0)")
+    @Attachment(value = "screenshot", type = "image/png")
     @And("Rate is {string}")
     public void rateIs(String rateValue) {
         BookingSearchPage page = new BookingSearchPage(driver);
