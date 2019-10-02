@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BookingMainPage;
 import pages.BookingSearchPage;
+import utils.AllureUtils;
 import utils.CapabilitiesGenerator;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class BookingSearchSteps {
     public void iWantToSearchFor(String hotelName) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
         searchItem = new SearchItem(hotelName);
+        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("User performs search")
@@ -45,6 +47,7 @@ public class BookingSearchSteps {
         bookingMainPage = new BookingMainPage(driver);
         bookingMainPage.searchByKeyword(searchItem.getSearchString());
         searchPage = new BookingSearchPage(driver);
+        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("Checking if hotel name is correct (Europe)")
@@ -55,6 +58,7 @@ public class BookingSearchSteps {
         List<String> hotels = resultPage.getResultLinks();
         hotelIndex = hotels.indexOf(hotelName);
         assertThat(hotels, hasItem(hotelName));
+        AllureUtils.takeScreenshot(driver);
     }
 
     @Step("Checking if hotel has correct rate (9.0)")
@@ -65,5 +69,6 @@ public class BookingSearchSteps {
         List<String> rate = page.getHotelsRate();
         assertEquals(rate.get(hotelIndex), rateValue);
         driver.quit();
+        AllureUtils.takeScreenshot(driver);
     }
 }
