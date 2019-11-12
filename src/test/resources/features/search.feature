@@ -4,8 +4,8 @@ Feature: Wikipedia search
     When User does search
     Then Wiki page "ALICE (company)" is on the first page
   Scenario: Search wiki page for Google
-    Given Keyword for search is "Google Company"
+    Given Keyword for search is "Google company"
     When User does search
-    Then Wiki page "Google" is on the first page
+    Then Wiki page "History of Google" is on the first page
     
     
