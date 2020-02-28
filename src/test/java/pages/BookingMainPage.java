@@ -15,8 +15,8 @@ public class BookingMainPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//button[@class='c2-calendar-close-button c2-calendar-close-button-clearappearance']")
-    private WebElement closeCalendarBtn;
+    /*@FindBy(xpath = "//button[@class='c2-calendar-close-button c2-calendar-close-button-clearappearance']")
+    private WebElement closeCalendarBtnMain;*/
 
     public BookingMainPage(WebDriver driver) {
         super(driver);
@@ -24,9 +24,10 @@ public class BookingMainPage extends BasePage {
     }
 
     public void searchByKeyword(String keyword){
-        wait.until(ExpectedConditions.visibilityOf(closeCalendarBtn));
-        closeCalendarBtn.click();
+        /*wait.until(ExpectedConditions.visibilityOf(closeCalendarBtnMain));
+        closeCalendarBtnMain.click();*/
         wait.until(ExpectedConditions.visibilityOf(searchField));
+        searchField.click();
         searchField.sendKeys(keyword);
         wait.until(ExpectedConditions.visibilityOf(searchButton));
         searchButton.click();
