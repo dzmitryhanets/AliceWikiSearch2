@@ -9,9 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BookingMainPage extends BasePage {
     WebDriverWait wait;
 
-    @FindBy(xpath = "//input[@id='ss']")
-    private WebElement searchField;
-
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement searchButton;
 

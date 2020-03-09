@@ -18,8 +18,8 @@ public class BookingSearchPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'bui-review-score__badge')]")
     private List<WebElement> rate;
 
-    @FindBy(xpath = "//i[@class='c2-calendar-close-button-icon']")
-    private WebElement closeCalendarBtn;
+    @FindBy(xpath = "//*[contains(@class, 'xp-calendar')]|//i[@class='c2-calendar-close-button-icon']")
+    private WebElement calendarModal;
 
     public BookingSearchPage(WebDriver driver) {
         super(driver);
@@ -27,8 +27,8 @@ public class BookingSearchPage extends BasePage {
     }
 
     public List<String> getResultLinks() {
-        wait.until(ExpectedConditions.visibilityOf(closeCalendarBtn));
-        closeCalendarBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(calendarModal));
+        searchField.click();
         return resultsLinks.stream().map(result->result.getAttribute("innerText"))
                 .filter(result-> !result.isEmpty()).collect(Collectors.toList());
     }
