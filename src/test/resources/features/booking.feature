@@ -3,4 +3,4 @@ Feature: Booking search
     Given I want to search for "Europe Minsk"
     When I do search
     Then Results page should contain "Europe Hotel "
-    And Rate is "9.1"
+    And Rate is "9.0"
