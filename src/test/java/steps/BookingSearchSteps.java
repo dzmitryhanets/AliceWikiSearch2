@@ -54,7 +54,7 @@ public class BookingSearchSteps {
         assertThat(hotels, hasItem(hotelName));
     }
 
-    @Step("Checking if hotel has correct rate (9.0)")
+    @Step("Checking if hotel has correct rate (9.1)")
     @And("Rate is {string}")
     public void rateIs(String rateValue) {
         BookingSearchPage page = new BookingSearchPage(driver);
